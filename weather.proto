@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package weather;
+
+service WeatherService {
+  rpc GetLatestWeather (WeatherRequest) returns (WeatherResponse);
+  rpc StreamWeather (WeatherRequest) returns (stream WeatherEvent);
+}
+
+message WeatherRequest {
+  string city = 1;
+  int32 limit = 2;
+}
+
+message WeatherResponse {
+  repeated WeatherEvent events = 1;
+  int32 total = 2;
+}
+
+message WeatherEvent {
+  string city = 1;
+  float temperature = 2;
+  float humidity = 3;
+  float wind_speed = 4;
+  string condition = 5;
+  string timestamp = 6;
+  int32 partition = 7;
+  int64 offset = 8;
+}
